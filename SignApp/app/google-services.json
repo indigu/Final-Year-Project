@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1470116983",
+    "firebase_url": "https://signapp-aries.firebaseio.com",
+    "project_id": "signapp-aries",
+    "storage_bucket": "signapp-aries.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1470116983:android:725dec7603ed4ab3",
+        "android_client_info": {
+          "package_name": "com.example.sign_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1470116983-vr7c8soj153omu16tl1vm6pf5elcjfki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtPX96fkA2cPTrqazzz1zAfoyyjUmvm_w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

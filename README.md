@@ -14,9 +14,6 @@ The last block uses and calls a pre-trained algorithm VGG16 to train the model.
 <img width="735" alt="knn results" src="https://user-images.githubusercontent.com/23058507/49383790-79840500-f711-11e8-995f-13ddc3598d16.PNG">
 
 The dataset used is from Kaggle: https://www.kaggle.com/grassknoted/asl-alphabet
+The dataset is in the folders named asl_alphabet_test and asl_alphabet_train
 
 The book, "Deep Learning For Computer Vision by Dr. Adrian Rosebrock", helped me with the basic understanding in Machine Learning and gave examples in how to code with Keras and TensorFlow.
-
-
-
-

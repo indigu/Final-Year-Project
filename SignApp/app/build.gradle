@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.sign_app"
-        minSdkVersion 26
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -25,6 +25,11 @@ dependencies {
 
     // FireBase core
     implementation 'com.google.firebase:firebase-core:16.0.1'
+    // FireBase authentication
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+    // FireBase storage
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

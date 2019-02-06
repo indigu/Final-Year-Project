@@ -15,12 +15,14 @@
         android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/avatar"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toTopOf="@+id/regName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/avatar" />
+        app:layout_constraintVertical_bias="0.658" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -124,5 +126,23 @@
         app:layout_constraintEnd_toEndOf="@+id/regButton"
         app:layout_constraintStart_toStartOf="@+id/regButton"
         app:layout_constraintTop_toTopOf="@+id/regButton" />
+
+    <EditText
+        android:id="@+id/regText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:textAlignment="center"
+        android:inputType="text"
+        android:text="Please click on the picture!"
+        app:layout_constraintBottom_toTopOf="@+id/regAvatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

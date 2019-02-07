@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.sign_app.R;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

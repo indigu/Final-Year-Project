@@ -1,7 +1,6 @@
 package com.example.sign_app.Activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -30,8 +29,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.net.URI;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -178,7 +175,7 @@ public class RegisterActivity extends AppCompatActivity {
     Function to change pages
     */
     private void updateUI() {
-        Intent homePage = new Intent(getApplicationContext(), Home.class);
+        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(homePage);
         finish();
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar loginProgress;
     private FirebaseAuth loginAuth;
     private Intent HomeActivity;
+    private Button btnReg;
 
 
     @Override
@@ -36,6 +39,16 @@ public class LoginActivity extends AppCompatActivity {
         loginProgress = findViewById(R.id.loginProgressBar);
         loginAuth = FirebaseAuth.getInstance();
         HomeActivity = new Intent(this, com.example.sign_app.Activities.HomeActivity.class);
+
+        btnReg = findViewById(R.id.registerBtn);
+        btnReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent registerActivity = new Intent(getApplicationContext(),RegisterActivity.class);
+                startActivity(registerActivity);
+                finish();
+            }
+        });
 
         loginProgress.setVisibility(View.INVISIBLE);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -86,5 +99,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showMessage(String s) {
         Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = loginAuth.getCurrentUser();
+
+        if(user != null){
+            updateUI();
+
+        }
+
     }
 }

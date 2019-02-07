@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     private Intent HomeActivity;
     private Button btnReg;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (mail.isEmpty() || pass.isEmpty()){
                     showMessage("Please make sure all fields are not empty");
+                    btnLogin.setVisibility(View.VISIBLE);
+                    loginProgress.setVisibility(View.INVISIBLE);
                 }
                 else{
                     login(mail,pass);
@@ -80,13 +81,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if(task.isSuccessful()){
-
-                    loginProgress.setVisibility(View.INVISIBLE);
-                    btnLogin.setVisibility(View.VISIBLE);
+                    btnLogin.setVisibility(View.INVISIBLE);
+                    loginProgress.setVisibility(View.VISIBLE);
                     updateUI();
                 }
                 else{
                     showMessage(task.getException().getMessage());
+                    btnLogin.setVisibility(View.VISIBLE);
+                    loginProgress.setVisibility(View.INVISIBLE);
                 }
             }
         });

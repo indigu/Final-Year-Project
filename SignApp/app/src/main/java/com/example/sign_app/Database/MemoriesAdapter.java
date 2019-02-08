@@ -32,8 +32,7 @@ public class MemoriesAdapter extends CursorAdapter {
         Memory memory = new Memory(cursor);
 
         holder.titleTextView.setText(memory.getTitle());
-        //TODO: Step 15 display the drawable from DB
-        holder.imageView.setImageDrawable(context.getResources().getDrawable(R.drawable.logo));
+        holder.imageView.setImageBitmap(memory.getImage());
     }
 
     private class ViewHolder {

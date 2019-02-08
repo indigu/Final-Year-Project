@@ -6,11 +6,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.sign_app.R;
 import com.example.sign_app.Database.MemoryDbHelper;
@@ -22,11 +24,11 @@ import java.io.InputStream;
 public class NewMemoryActivity extends AppCompatActivity {
 
     private static final int GALLERY_REQUEST_CODE = 1000;
+    private static final int CAMERA_REQUEST_CODE = 1001;
 
-
-    //TODO: Step 4. add a camera request code
     private ImageView selectedImageView;
     private EditText titleEditText;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,19 +47,26 @@ public class NewMemoryActivity extends AppCompatActivity {
     }
 
     public void openCamera(View view) {
-        //TODO: Step 5. launch camera activity
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+        }
+        else{
+            showMessage("Camera is not available.");
+        }
     }
 
     public void cancel(View view) {
+        Intent homeActivity = new Intent(this, HomeActivity.class);
+        startActivity(homeActivity);
         finish();
     }
 
     public void save(View view) {
-        //TODO: Step 9. Update model object
-        Memory memory = new Memory(titleEditText.getText().toString());
         Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
-
-        new MemoryDbHelper(this).addMemory(memory);
+        new MemoryDbHelper(this).addMemory(new Memory(titleEditText.getText().toString(), image));
+        Intent homeActivity = new Intent(this, HomeActivity.class);
+        startActivity(homeActivity);
         finish();
     }
 
@@ -73,5 +82,15 @@ public class NewMemoryActivity extends AppCompatActivity {
                 exception.printStackTrace();
             }
         }
+
+        if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            selectedImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
+    private void showMessage(String s) {
+        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
     }
 }

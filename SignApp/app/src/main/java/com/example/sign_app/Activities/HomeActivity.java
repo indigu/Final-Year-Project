@@ -2,9 +2,7 @@ package com.example.sign_app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.CursorAdapter;
+import android.widget.CursorAdapter;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -106,7 +104,6 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_userDatabase) {
 
-            getSupportActionBar().setTitle("Personal Databases");
             Intent homeActivity = new Intent(this, HomeActivity.class);
             startActivity(homeActivity);
             finish();
@@ -152,16 +149,16 @@ public class HomeActivity extends AppCompatActivity
     }
 
     // User Database
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        ((CursorAdapter)gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ((CursorAdapter)gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
+    }
 
     public void addNewMemory(View view) {
         Intent intent = new Intent(this, NewMemoryActivity.class);
         startActivity(intent);
+        finish();
     }
-
 }

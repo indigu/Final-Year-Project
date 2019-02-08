@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.sign_app.Models.Memory;
 
+
 public class MemoryDbHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
@@ -15,11 +16,11 @@ public class MemoryDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "memories.db";
     private static final int DATABASE_VERSION = 1;
 
-    //TODO: Step 11: Add a new column
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + MemoryContract.MemoryEntry.TABLE_NAME + " (" +
                     MemoryContract.MemoryEntry._ID + INTEGER_TYPE + " PRIMARY KEY" + COMMA_SEP +
-                    MemoryContract.MemoryEntry.COLUMN_TITLE + TEXT_TYPE + " )";
+                    MemoryContract.MemoryEntry.COLUMN_TITLE + TEXT_TYPE + COMMA_SEP +
+                    MemoryContract.MemoryEntry.COLUMN_IMAGE + TEXT_TYPE + " )";
 
     public MemoryDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -54,7 +55,7 @@ public class MemoryDbHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(MemoryContract.MemoryEntry.COLUMN_TITLE, memory.getTitle());
-        //TODO: Step 12: Add a new pair
+        values.put(MemoryContract.MemoryEntry.COLUMN_IMAGE, memory.getImageAsString());
 
         return db.insert(MemoryContract.MemoryEntry.TABLE_NAME, null, values) != -1;
     }

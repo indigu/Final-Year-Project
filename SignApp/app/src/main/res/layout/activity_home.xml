@@ -14,6 +14,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <GridView
+        android:id="@+id/activity_main_grid_view"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="4dp"
+        android:gravity="center"
+        android:horizontalSpacing="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/activity_main_empty_view"
+        android:textAppearance="?android:textAppearanceLarge"
+        android:text="activity_main_empty_view_text"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <android.support.design.widget.NavigationView
         android:background="#fff"
         android:id="@+id/nav_view"

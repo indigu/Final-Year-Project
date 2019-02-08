@@ -17,6 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sign_app.Fragments.HomeFragment;
+import com.example.sign_app.Fragments.OnlineDatabasesFragment;
+import com.example.sign_app.Fragments.QuizzesFragment;
 import com.example.sign_app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -96,19 +99,22 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_userDatabase) {
 
-        } else if (id == R.id.nav_slideshow) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_onlineDatabase) {
 
-        } else if (id == R.id.nav_share) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new OnlineDatabasesFragment()).commit();
 
-        } else if (id == R.id.nav_signOut) {
+        } else if (id == R.id.nav_quizzes) {
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuizzesFragment()).commit();
 
         }
+//       else if (id == R.id.nav_signOut) {
+//
+//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -1,9 +1,9 @@
 package com.example.sign_app.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.TextViewCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sign_app.Fragments.HomeFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
 import com.example.sign_app.Fragments.QuizzesFragment;
 import com.example.sign_app.R;
@@ -101,7 +100,9 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_userDatabase) {
 
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
+            Intent homeActivity = new Intent(this, HomeActivity.class);
+            startActivity(homeActivity);
+            finish();
 
         } else if (id == R.id.nav_onlineDatabase) {
 
@@ -111,10 +112,13 @@ public class HomeActivity extends AppCompatActivity
 
             getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuizzesFragment()).commit();
 
+        } else if (id == R.id.nav_signOut) {
+
+            FirebaseAuth.getInstance().signOut();
+            Intent loginActivity = new Intent(this, LoginActivity.class);
+            startActivity(loginActivity);
+            finish();
         }
-//       else if (id == R.id.nav_signOut) {
-//
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

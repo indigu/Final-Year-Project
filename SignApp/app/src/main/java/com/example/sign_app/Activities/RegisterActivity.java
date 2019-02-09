@@ -1,8 +1,11 @@
 package com.example.sign_app.Activities;
 
 import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -137,38 +140,63 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateUser(final String name, Uri chosenImgUri, final FirebaseUser currentUser) {
-        // upload photo to FireBase
-        StorageReference userStorage = FirebaseStorage.getInstance().getReference().child("user_photos");
-        final StorageReference imageFilePath = userStorage.child(chosenImgUri.getLastPathSegment());
-        imageFilePath.putFile(chosenImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // uploaded successfully
-                // get image URL
 
-                imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                .setDisplayName(name)
-                                .setPhotoUri(uri)
-                                .build();
+        if(chosenImgUri == null) {
 
-                        currentUser.updateProfile(profileUpdate)
-                                .addOnCompleteListener((new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
-                                            // user update success
-                                            showMessage("User registered!");
-                                            updateUI();
+            Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+                    "://" + getResources().getResourcePackageName(R.drawable.logo)
+                    + '/' + getResources().getResourceTypeName(R.drawable.logo) + '/' + getResources().getResourceEntryName(R.drawable.logo) );
+
+            UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .setPhotoUri(imageUri)
+                    .build();
+
+            currentUser.updateProfile(profileUpdate)
+                    .addOnCompleteListener((new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                // user update success
+                                showMessage("User registered!");
+                                updateUI();
+                            }
+                        }
+                    }));
+        }
+        else{
+            // upload photo to FireBase
+            StorageReference userStorage = FirebaseStorage.getInstance().getReference().child("user_photos");
+            final StorageReference imageFilePath = userStorage.child(chosenImgUri.getLastPathSegment());
+            imageFilePath.putFile(chosenImgUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    // uploaded successfully
+                    // get image URL
+                    imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .setPhotoUri(uri)
+                                    .build();
+
+                            currentUser.updateProfile(profileUpdate)
+                                    .addOnCompleteListener((new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                // user update success
+                                                showMessage("User registered!");
+                                                updateUI();
+                                            }
                                         }
-                                    }
-                                }));
-                    }
-                });
-            }
-        });
+                                    }));
+                        }
+                    });
+                }
+            });
+        }
     }
 
     /*

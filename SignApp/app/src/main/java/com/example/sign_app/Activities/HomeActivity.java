@@ -12,13 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sign_app.Database.MemoriesAdapter;
-import com.example.sign_app.Database.MemoryDbHelper;
+import com.example.sign_app.Fragments.EditUserDatabaseFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
 import com.example.sign_app.Fragments.QuizzesFragment;
 import com.example.sign_app.R;
@@ -32,9 +30,9 @@ public class HomeActivity extends AppCompatActivity
     FirebaseAuth homeAuth;
     FirebaseUser currentUser;
 
-    // User Database variables
-    private MemoryDbHelper dbHelper;
-    private GridView gridView;
+//    // User Database variables
+//    private MemoryDbHelper dbHelper;
+//    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +56,11 @@ public class HomeActivity extends AppCompatActivity
 
         updateNavHeader();
 
-        // User Database
-        this.gridView = (GridView) findViewById(R.id.activity_main_grid_view);
-        this.dbHelper = new MemoryDbHelper(this);
-        this.gridView.setAdapter(new MemoriesAdapter(this, this.dbHelper.readAllMemories(), false));
-        this.gridView.setEmptyView(findViewById(R.id.activity_main_empty_view));
+//        // User Database
+//        this.gridView = findViewById(R.id.activity_main_grid_view);
+//        this.dbHelper = new MemoryDbHelper(this);
+//        this.gridView.setAdapter(new MemoriesAdapter(this, this.dbHelper.readAllMemories(), false));
+//        this.gridView.setEmptyView(findViewById(R.id.activity_main_empty_view));
     }
 
     @Override
@@ -104,9 +102,14 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_userDatabase) {
 
-            Intent homeActivity = new Intent(this, HomeActivity.class);
-            startActivity(homeActivity);
+            Intent DatabaseActivity = new Intent(getApplicationContext(), DatabaseActivity.class);
+            startActivity(DatabaseActivity);
             finish();
+
+        } else if (id == R.id.nav_editUserDatabase) {
+
+            getSupportActionBar().setTitle("Edit User Database");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new EditUserDatabaseFragment()).commit();
 
         } else if (id == R.id.nav_onlineDatabase) {
 
@@ -128,6 +131,7 @@ public class HomeActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
@@ -149,16 +153,16 @@ public class HomeActivity extends AppCompatActivity
     }
 
     // User Database
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        ((CursorAdapter)gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
-    }
-
-    public void addNewMemory(View view) {
-        Intent intent = new Intent(this, NewMemoryActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        ((CursorAdapter)gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
+//    }
+//
+//    public void addNewMemory(View view) {
+//        Intent intent = new Intent(this, NewMemoryActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }

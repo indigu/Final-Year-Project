@@ -65,8 +65,8 @@ public class NewMemoryActivity extends AppCompatActivity {
     public void save(View view) {
         Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
         new MemoryDbHelper(this).addMemory(new Memory(titleEditText.getText().toString(), image));
-        Intent homeActivity = new Intent(this, HomeActivity.class);
-        startActivity(homeActivity);
+        Intent databaseActivity = new Intent(this, DatabaseActivity.class);
+        startActivity(databaseActivity);
         finish();
     }
 

@@ -18,40 +18,4 @@
 
     </FrameLayout>
 
-    <GridView
-        android:id="@+id/activity_main_grid_view"
-        android:paddingTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:horizontalSpacing="4dp"
-        android:numColumns="auto_fit"
-        android:verticalSpacing="8dp" />
-
-    <TextView
-        android:id="@+id/activity_main_empty_view"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="activity_main_empty_view_text"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/myFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:onClick="addNewMemory"
-        android:src="@drawable/ic_menu_camera"
-        app:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.98"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/container"
-        app:layout_constraintVertical_bias="0.98" />
-
 </android.support.constraint.ConstraintLayout>

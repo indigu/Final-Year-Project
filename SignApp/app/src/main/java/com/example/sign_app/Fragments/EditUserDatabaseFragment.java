@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import com.example.sign_app.R;
 
-public class QuizzesFragment extends Fragment {
+public class EditUserDatabaseFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_quizzes, container, false);
+        return inflater.inflate(R.layout.fragment_edit_user_database, container, false);
     }
 }

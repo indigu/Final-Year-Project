@@ -8,12 +8,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.sign_app.Fragments.DatabaseFragment;
 import com.example.sign_app.R;
 import com.example.sign_app.Database.MemoryDbHelper;
 import com.example.sign_app.Models.Memory;
@@ -21,7 +22,7 @@ import com.example.sign_app.Models.Memory;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class NewMemoryActivity extends AppCompatActivity {
+public class NewMemoryActivity extends FragmentActivity {
 
     private static final int GALLERY_REQUEST_CODE = 1000;
     private static final int CAMERA_REQUEST_CODE = 1001;
@@ -65,8 +66,8 @@ public class NewMemoryActivity extends AppCompatActivity {
     public void save(View view) {
         Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
         new MemoryDbHelper(this).addMemory(new Memory(titleEditText.getText().toString(), image));
-        Intent databaseActivity = new Intent(this, DatabaseActivity.class);
-        startActivity(databaseActivity);
+        Intent homeActivity = new Intent(this, HomeActivity.class);
+        startActivity(homeActivity);
         finish();
     }
 

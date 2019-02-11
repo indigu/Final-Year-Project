@@ -8,7 +8,6 @@
     tools:context=".Activities.LoginActivity">
 
     <ImageView
-        android:id="@+id/loginAvatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"

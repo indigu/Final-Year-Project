@@ -2,7 +2,6 @@ package com.example.sign_app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CursorAdapter;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sign_app.Fragments.DatabaseFragment;
 import com.example.sign_app.Fragments.EditUserDatabaseFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
 import com.example.sign_app.Fragments.QuizzesFragment;
@@ -29,10 +29,6 @@ public class HomeActivity extends AppCompatActivity
     // FireBase variables
     FirebaseAuth homeAuth;
     FirebaseUser currentUser;
-
-//    // User Database variables
-//    private MemoryDbHelper dbHelper;
-//    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +51,11 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         updateNavHeader();
-
-//        // User Database
-//        this.gridView = findViewById(R.id.activity_main_grid_view);
-//        this.dbHelper = new MemoryDbHelper(this);
-//        this.gridView.setAdapter(new MemoriesAdapter(this, this.dbHelper.readAllMemories(), false));
-//        this.gridView.setEmptyView(findViewById(R.id.activity_main_empty_view));
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -102,9 +92,8 @@ public class HomeActivity extends AppCompatActivity
 
         if (id == R.id.nav_userDatabase) {
 
-            Intent DatabaseActivity = new Intent(getApplicationContext(), DatabaseActivity.class);
-            startActivity(DatabaseActivity);
-            finish();
+            getSupportActionBar().setTitle("Database");
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, new DatabaseFragment()).commit();
 
         } else if (id == R.id.nav_editUserDatabase) {
 
@@ -129,7 +118,7 @@ public class HomeActivity extends AppCompatActivity
             finish();
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
@@ -137,7 +126,7 @@ public class HomeActivity extends AppCompatActivity
 
     public void updateNavHeader(){
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
         TextView navUser = headerView.findViewById(R.id.navUser);
@@ -151,18 +140,4 @@ public class HomeActivity extends AppCompatActivity
         Glide.with(this).load(currentUser.getPhotoUrl()).into(navAvatar);
 
     }
-
-    // User Database
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        ((CursorAdapter)gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
-//    }
-//
-//    public void addNewMemory(View view) {
-//        Intent intent = new Intent(this, NewMemoryActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
 }

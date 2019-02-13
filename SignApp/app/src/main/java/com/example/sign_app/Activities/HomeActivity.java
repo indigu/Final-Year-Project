@@ -2,6 +2,8 @@ package com.example.sign_app.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,7 +18,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sign_app.Fragments.DatabaseFragment;
-import com.example.sign_app.Fragments.EditUserDatabaseFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
 import com.example.sign_app.Fragments.QuizzesFragment;
 import com.example.sign_app.R;
@@ -50,6 +51,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        displaySelectedScreen(R.id.nav_userDatabase);
         updateNavHeader();
     }
 
@@ -85,41 +87,42 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void displaySelectedScreen(int id){
+        Fragment fragment = null;
+
+        switch(id){
+            case R.id.nav_userDatabase:
+                fragment = new DatabaseFragment();
+                break;
+            case R.id.nav_onlineDatabase:
+                fragment = new OnlineDatabasesFragment();
+                break;
+            case R.id.nav_quizzes:
+                fragment = new QuizzesFragment();
+                break;
+            case R.id.nav_signOut:
+                FirebaseAuth.getInstance().signOut();
+                Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(loginActivity);
+                finish();
+        }
+
+        if(fragment != null){
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.container, fragment);
+            ft.commit();
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_userDatabase) {
-
-            getSupportActionBar().setTitle("Database");
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new DatabaseFragment()).commit();
-
-        } else if (id == R.id.nav_editUserDatabase) {
-
-            getSupportActionBar().setTitle("Edit User Database");
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new EditUserDatabaseFragment()).commit();
-
-        } else if (id == R.id.nav_onlineDatabase) {
-
-            getSupportActionBar().setTitle("Online Databases");
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new OnlineDatabasesFragment()).commit();
-
-        } else if (id == R.id.nav_quizzes) {
-
-            getSupportActionBar().setTitle("Quizzes");
-            getSupportFragmentManager().beginTransaction().replace(R.id.container, new QuizzesFragment()).commit();
-
-        } else if (id == R.id.nav_signOut) {
-
-            FirebaseAuth.getInstance().signOut();
-            Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(loginActivity);
-            finish();
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        displaySelectedScreen(id);
 
         return true;
     }

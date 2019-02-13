@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.sign_app.Fragments.DatabaseFragment;
 import com.example.sign_app.R;
 import com.example.sign_app.Database.MemoryDbHelper;
 import com.example.sign_app.Models.Memory;

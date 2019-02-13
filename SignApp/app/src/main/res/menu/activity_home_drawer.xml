@@ -7,15 +7,11 @@
         <item
             android:id="@+id/nav_userDatabase"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Database" />
-        <item
-            android:id="@+id/nav_editUserDatabase"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Edit User Database" />
+            android:title="Local Database" />
         <item
             android:id="@+id/nav_onlineDatabase"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Online Databases" />
+            android:title="Online Database" />
         <item
             android:id="@+id/nav_quizzes"
             android:icon="@drawable/ic_quizzes"

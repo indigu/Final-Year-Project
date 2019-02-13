@@ -11,7 +11,12 @@ import android.view.ViewGroup;
 import com.example.sign_app.R;
 
 public class OnlineDatabasesFragment extends Fragment {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstance){
+        super.onViewCreated(view, savedInstance);
 
+        getActivity().setTitle("Online Databases");
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

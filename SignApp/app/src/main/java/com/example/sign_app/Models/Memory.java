@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 public class Memory {
     private static final float PREFERRED_WIDTH = 250;
     private static final float PREFERRED_HEIGHT = 250;
+    private String id;
     private String title;
     private String image;
 
@@ -19,6 +20,7 @@ public class Memory {
     public static final int COL_IMAGE = 2;
 
     public Memory(Cursor cursor) {
+        this.id = cursor.getString(COL_ID);
         this.title = cursor.getString(COL_TITLE);
         this.image = cursor.getString(COL_IMAGE);
     }
@@ -30,6 +32,10 @@ public class Memory {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public String getID(){
+        return this.id;
     }
 
     public Bitmap getImage() {

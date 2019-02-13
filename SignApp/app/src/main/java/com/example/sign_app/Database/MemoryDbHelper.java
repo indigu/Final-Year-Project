@@ -65,9 +65,10 @@ public class MemoryDbHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_NAME, null, values) != -1;
     }
 
-    public Cursor getItemID(String title){
+    public Cursor getItemID(String title) {
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT " + _ID + " FROM " + TABLE_NAME + " WHERE " + _ID + " = '" + title + "'";;
+        String query = "SELECT " + _ID + " FROM " + TABLE_NAME + " WHERE " + _ID + " = '" + title + "'";
+        ;
         Cursor data = db.rawQuery(query, null);
         return data;
     }

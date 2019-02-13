@@ -78,22 +78,20 @@ public class RegisterActivity extends AppCompatActivity {
                 final String password2 = userPass2.getText().toString();
 
                 // error check to make sure user has inputted in values
-                if( name.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()){
+                if (name.isEmpty() || email.isEmpty() || password1.isEmpty() || password2.isEmpty()) {
                     // displays an error message to user
                     showMessage("Please make sure all fields are not empty");
                     regBtn.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
 
-                }
-                else if(!password1.equals(password2)){
+                } else if (!password1.equals(password2)) {
                     // displays an error message to user
                     showMessage("Please make sure both passwords are equal");
                     regBtn.setVisibility(View.VISIBLE);
                     loadingProgress.setVisibility(View.INVISIBLE);
-                }
-                else{
+                } else {
                     // no errors
-                    CreateUser(email,name,password1);
+                    CreateUser(email, name, password1);
                 }
             }
         });
@@ -105,8 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (Build.VERSION.SDK_INT >= 22) {
                     checkAndRequestPermission();
-                }
-                else {
+                } else {
                     openGallery();
                 }
             }
@@ -123,13 +120,12 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             // account created successfully
                             showMessage("Account Registered!");
                             // update profile picture and name
-                            updateUser( name, chosenImgUri, userAuth.getCurrentUser());
-                        }
-                        else{
+                            updateUser(name, chosenImgUri, userAuth.getCurrentUser());
+                        } else {
                             // account created unsuccessfully
                             showMessage("Something went wrong..." + task.getException().getMessage());
                             regBtn.setVisibility(View.VISIBLE);
@@ -141,11 +137,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void updateUser(final String name, Uri chosenImgUri, final FirebaseUser currentUser) {
 
-        if(chosenImgUri == null) {
+        if (chosenImgUri == null) {
 
             Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                     "://" + getResources().getResourcePackageName(R.drawable.logo)
-                    + '/' + getResources().getResourceTypeName(R.drawable.logo) + '/' + getResources().getResourceEntryName(R.drawable.logo) );
+                    + '/' + getResources().getResourceTypeName(R.drawable.logo) + '/' + getResources().getResourceEntryName(R.drawable.logo));
 
             UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name)
@@ -163,8 +159,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         }
                     }));
-        }
-        else{
+        } else {
             // upload photo to FireBase
             StorageReference userStorage = FirebaseStorage.getInstance().getReference().child("user_photos");
             final StorageReference imageFilePath = userStorage.child(chosenImgUri.getLastPathSegment());
@@ -212,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity {
     Function for displaying messages
     */
     private void showMessage(String s) {
-        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }
 
     /*
@@ -227,18 +222,16 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void checkAndRequestPermission() {
         // for newer phones
-        if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED){
-            if (ActivityCompat.shouldShowRequestPermissionRationale(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)){
+        if (ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 Toast.makeText(RegisterActivity.this, "The app requires access to the storage to work", Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
                 ActivityCompat.requestPermissions(RegisterActivity.this,
-                                                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                                                    PReqCode);
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PReqCode);
             }
-        }
-        else{
+        } else {
             openGallery();
         }
     }
@@ -248,7 +241,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(resultCode == RESULT_OK && requestCode == RequestCode && data != null){
+        if (resultCode == RESULT_OK && requestCode == RequestCode && data != null) {
             // this signals the user successfully picking an image
             // we then save its reference to a Uri variable
             chosenImgUri = data.getData();

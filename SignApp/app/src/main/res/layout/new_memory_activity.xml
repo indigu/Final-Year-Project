@@ -2,52 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/new_memory_selected_image"
-        android:src="@drawable/logo"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="150dp"
+        android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/new_memory_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:hint="Name of your sign"/>
+        android:hint="Name of your sign"
+        android:textAlignment="center" />
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:onClick="openGallery"
-        android:text="Choose from Gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:text="Choose from Gallery" />
 
     <Button
-        android:onClick="openCamera"
-        android:text="Take a picture!"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="openCamera"
+        android:text="Take a picture!" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="cancel"
-            android:text="Cancel"
-            android:layout_height="wrap_content" />
+            android:text="Cancel" />
 
         <Button
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="save"
-            android:text="Save"
-            android:layout_height="wrap_content" />
+            android:text="Save" />
 
     </LinearLayout>
 

@@ -50,8 +50,7 @@ public class NewMemoryActivity extends FragmentActivity {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
-        }
-        else{
+        } else {
             showMessage("Camera is not available.");
         }
     }
@@ -63,7 +62,7 @@ public class NewMemoryActivity extends FragmentActivity {
     }
 
     public void save(View view) {
-        Bitmap image = ((BitmapDrawable)selectedImageView.getDrawable()).getBitmap();
+        Bitmap image = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
         new MemoryDbHelper(this).addMemory(new Memory(titleEditText.getText().toString(), image));
         Intent homeActivity = new Intent(this, HomeActivity.class);
         startActivity(homeActivity);
@@ -91,6 +90,6 @@ public class NewMemoryActivity extends FragmentActivity {
     }
 
     private void showMessage(String s) {
-        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }
 }

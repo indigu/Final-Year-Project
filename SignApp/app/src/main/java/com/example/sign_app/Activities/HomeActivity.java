@@ -87,10 +87,10 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void displaySelectedScreen(int id){
+    private void displaySelectedScreen(int id) {
         Fragment fragment = null;
 
-        switch(id){
+        switch (id) {
             case R.id.nav_userDatabase:
                 fragment = new DatabaseFragment();
                 break;
@@ -107,7 +107,7 @@ public class HomeActivity extends AppCompatActivity
                 finish();
         }
 
-        if(fragment != null){
+        if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.container, fragment);
             ft.commit();
@@ -127,7 +127,7 @@ public class HomeActivity extends AppCompatActivity
         return true;
     }
 
-    public void updateNavHeader(){
+    public void updateNavHeader() {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);

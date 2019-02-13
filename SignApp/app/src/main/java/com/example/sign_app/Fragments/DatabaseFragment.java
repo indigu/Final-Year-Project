@@ -28,7 +28,7 @@ public class DatabaseFragment extends Fragment {
     FloatingActionButton fab;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstance){
+    public void onViewCreated(View view, @Nullable Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
 
         getActivity().setTitle("User Database");
@@ -89,10 +89,10 @@ public class DatabaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((CursorAdapter)gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
+        ((CursorAdapter) gridView.getAdapter()).swapCursor(this.dbHelper.readAllMemories());
     }
 
-    private void toastMessage(String message){
-        Toast.makeText(getActivity().getApplicationContext(),message, Toast.LENGTH_SHORT).show();
+    private void toastMessage(String message) {
+        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

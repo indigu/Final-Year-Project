@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerActivity = new Intent(getApplicationContext(),RegisterActivity.class);
+                Intent registerActivity = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(registerActivity);
                 finish();
             }
@@ -59,13 +59,12 @@ public class LoginActivity extends AppCompatActivity {
                 final String mail = userMail.getText().toString();
                 final String pass = userPass.getText().toString();
 
-                if (mail.isEmpty() || pass.isEmpty()){
+                if (mail.isEmpty() || pass.isEmpty()) {
                     showMessage("Please make sure all fields are not empty");
                     btnLogin.setVisibility(View.VISIBLE);
                     loginProgress.setVisibility(View.INVISIBLE);
-                }
-                else{
-                    login(mail,pass);
+                } else {
+                    login(mail, pass);
                 }
 
             }
@@ -80,12 +79,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     btnLogin.setVisibility(View.INVISIBLE);
                     loginProgress.setVisibility(View.VISIBLE);
                     updateUI();
-                }
-                else{
+                } else {
                     showMessage(task.getException().getMessage());
                     btnLogin.setVisibility(View.VISIBLE);
                     loginProgress.setVisibility(View.INVISIBLE);
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void showMessage(String s) {
-        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -108,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = loginAuth.getCurrentUser();
 
-        if(user != null){
+        if (user != null) {
             updateUI();
 
         }

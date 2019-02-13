@@ -13,7 +13,7 @@ import com.example.sign_app.R;
 public class QuizzesFragment extends Fragment {
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstance){
+    public void onViewCreated(View view, @Nullable Bundle savedInstance) {
         super.onViewCreated(view, savedInstance);
 
         getActivity().setTitle("Quizzes");

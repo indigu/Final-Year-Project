@@ -27,7 +27,7 @@ public class MemoriesAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        ViewHolder holder = (ViewHolder)view.getTag();
+        ViewHolder holder = (ViewHolder) view.getTag();
 
         Memory memory = new Memory(cursor);
 

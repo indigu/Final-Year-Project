@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,7 +100,7 @@ public class OnlineDatabasesFragment extends Fragment {
         mTextViewShowUploads.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                openImagesFragment();
             }
         });
 
@@ -174,6 +176,14 @@ public class OnlineDatabasesFragment extends Fragment {
 
     }
 
+    private void openImagesFragment(){
+        Fragment thirdFragment = new ImagesFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, thirdFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    
     private void showMessage(String s) {
         Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }

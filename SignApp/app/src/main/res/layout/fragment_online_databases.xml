@@ -18,7 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/button_choose_image"
-        android:hint="Enter File Name" />
+        android:hint="Enter File Name"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1" />
 
     <ImageView
         android:id="@+id/image_view"

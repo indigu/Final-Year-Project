@@ -183,7 +183,7 @@ public class OnlineDatabasesFragment extends Fragment {
         transaction.addToBackStack(null);
         transaction.commit();
     }
-    
+
     private void showMessage(String s) {
         Toast.makeText(getActivity().getApplicationContext(), s, Toast.LENGTH_SHORT).show();
     }

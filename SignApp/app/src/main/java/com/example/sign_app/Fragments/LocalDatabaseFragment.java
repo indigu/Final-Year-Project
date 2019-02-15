@@ -19,7 +19,7 @@ import com.example.sign_app.Database.LocalDatabaseAdapter;
 import com.example.sign_app.Database.LocalDatabaseHelper;
 import com.example.sign_app.R;
 
-public class DatabaseFragment extends Fragment {
+public class LocalDatabaseFragment extends Fragment {
 
     private static final String TAG = "tag";
 
@@ -38,7 +38,7 @@ public class DatabaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_database, container, false);
+        View view = inflater.inflate(R.layout.fragment_local_database, container, false);
 
         this.gridView = view.findViewById(R.id.activity_main_grid_view);
         this.dbHelper = new LocalDatabaseHelper(getActivity());

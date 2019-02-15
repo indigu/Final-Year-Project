@@ -27,7 +27,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.image_item, parent, false);
+        View v = LayoutInflater.from(mContext).inflate(R.layout.fragment_online_image_item, parent, false);
         return new ImageViewHolder(v);
     }
 
@@ -37,6 +37,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         holder.textViewName.setText(uploadCurrent.getName());
         Picasso.with(mContext)
                 .load(uploadCurrent.getImageUrl())
+                .placeholder(R.drawable.ic_placeholder)
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);

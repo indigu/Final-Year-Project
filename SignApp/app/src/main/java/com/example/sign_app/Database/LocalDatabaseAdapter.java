@@ -20,7 +20,7 @@ public class LocalDatabaseAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        View view = LayoutInflater.from(context).inflate(R.layout.memory_list_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_local_database_list_item, viewGroup, false);
         view.setTag(new ViewHolder(view));
         return view;
     }

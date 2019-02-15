@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.sign_app.Database.ImageAdapter;
@@ -27,6 +28,7 @@ public class ImagesFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
+    private ProgressBar mProgressCircle;
 
     private DatabaseReference mDatabaseRef;
     private List<OnlineUpload> mUploads;
@@ -42,6 +44,8 @@ public class ImagesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_images, container, false);
+
+        mProgressCircle = view.findViewById(R.id.online_progress);
 
         mLinearLayoutManager = new LinearLayoutManager(getActivity());
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -68,11 +72,13 @@ public class ImagesFragment extends Fragment {
                 mAdapter = new ImageAdapter(getActivity(), mUploads);
 
                 mRecyclerView.setAdapter(mAdapter);
+                mProgressCircle.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 showMessage(databaseError.getMessage());
+                mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
 

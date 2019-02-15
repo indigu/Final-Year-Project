@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.sign_app.Fragments.DatabaseFragment;
+import com.example.sign_app.Fragments.LocalDatabaseFragment;
 import com.example.sign_app.Fragments.ImagesFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
 import com.example.sign_app.Fragments.QuizzesFragment;
@@ -93,7 +93,7 @@ public class HomeActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_userDatabase:
-                fragment = new DatabaseFragment();
+                fragment = new LocalDatabaseFragment();
                 break;
             case R.id.nav_imagesDatabase:
                 fragment = new ImagesFragment();

@@ -33,7 +33,7 @@ public class NewMemoryActivity extends FragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_memory_activity);
+        setContentView(R.layout.fragment_new_local_image);
 
         this.selectedImageView = (ImageView) findViewById(R.id.new_memory_selected_image);
         this.titleEditText = (EditText) findViewById(R.id.new_memory_title);

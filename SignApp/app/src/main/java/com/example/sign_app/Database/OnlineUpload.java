@@ -1,8 +1,8 @@
 package com.example.sign_app.Database;
 
 public class OnlineUpload {
-    private String mName;
-    private String mImageUrl;
+    private String name;
+    private String imageUrl;
 
     public OnlineUpload(){
         //empty constructor
@@ -10,23 +10,28 @@ public class OnlineUpload {
 
     public OnlineUpload(String name, String imageUrl){
         if (name.trim().equals("")){
-            name = "Name me!";
+            this.name = "Name me!";
         }
+        this.name = name;
+        this.imageUrl = imageUrl;
     }
 
     public String getName(){
-        return mName;
+
+        return name;
     }
 
     public void setName(String name){
-        mName = name;
+
+        this.name = name;
     }
 
     public String getImageUrl(){
-        return mImageUrl;
+
+        return imageUrl;
     }
 
     public void setImageUrl(String imageUrl){
-        mImageUrl = imageUrl;
+        this.imageUrl = imageUrl;
     }
 }

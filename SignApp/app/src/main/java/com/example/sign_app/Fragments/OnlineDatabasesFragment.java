@@ -3,6 +3,7 @@ package com.example.sign_app.Fragments;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +41,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import static android.app.Activity.RESULT_OK;
+import static android.support.constraint.Constraints.TAG;
 
 public class OnlineDatabasesFragment extends Fragment {
 
@@ -49,6 +52,8 @@ public class OnlineDatabasesFragment extends Fragment {
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
+
+    private static final String TAG = "OnlineDatabaseFragment";
 
     private Uri mImageUri;
 
@@ -152,10 +157,16 @@ public class OnlineDatabasesFragment extends Fragment {
 
                                 showMessage("Upload Successful!");
 
-                                OnlineUpload upload = new OnlineUpload(mEditTextFileName.getText().toString().trim(),
-                                    mStorageRef.getDownloadUrl().toString());
-                                String uploadID = mDatabaseRef.push().getKey();
-                                mDatabaseRef.child(uploadID).setValue(upload);
+                                Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!urlTask.isSuccessful());
+                                Uri downloadUrl = urlTask.getResult();
+
+                                Log.d(TAG, "onSuccess: FireBase download url: " + downloadUrl.toString());
+                                OnlineUpload upload = new OnlineUpload(mEditTextFileName.getText().toString().trim(),downloadUrl.toString());
+
+                                String uploadId = mDatabaseRef.push().getKey();
+                                mDatabaseRef.child(uploadId).setValue(upload);
+
                         }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

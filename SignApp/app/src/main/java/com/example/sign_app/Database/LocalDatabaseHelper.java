@@ -9,11 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.sign_app.Models.Memory;
 
 import static android.provider.BaseColumns._ID;
-import static com.example.sign_app.Database.MemoryContract.MemoryEntry.COLUMN_TITLE;
-import static com.example.sign_app.Database.MemoryContract.MemoryEntry.TABLE_NAME;
+import static com.example.sign_app.Database.LocalDatabaseContract.MemoryEntry.TABLE_NAME;
 
 
-public class MemoryDbHelper extends SQLiteOpenHelper {
+public class LocalDatabaseHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = " TEXT";
     private static final String INTEGER_TYPE = " INTEGER";
     private static final String COMMA_SEP = ",";
@@ -22,11 +21,11 @@ public class MemoryDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
-                    MemoryContract.MemoryEntry._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT " + COMMA_SEP +
-                    MemoryContract.MemoryEntry.COLUMN_TITLE + TEXT_TYPE + COMMA_SEP +
-                    MemoryContract.MemoryEntry.COLUMN_IMAGE + TEXT_TYPE + " )";
+                    LocalDatabaseContract.MemoryEntry._ID + INTEGER_TYPE + " PRIMARY KEY AUTOINCREMENT " + COMMA_SEP +
+                    LocalDatabaseContract.MemoryEntry.COLUMN_TITLE + TEXT_TYPE + COMMA_SEP +
+                    LocalDatabaseContract.MemoryEntry.COLUMN_IMAGE + TEXT_TYPE + " )";
 
-    public MemoryDbHelper(Context context) {
+    public LocalDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -58,9 +57,9 @@ public class MemoryDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(MemoryContract.MemoryEntry._ID, memory.getID());
-        values.put(MemoryContract.MemoryEntry.COLUMN_TITLE, memory.getTitle());
-        values.put(MemoryContract.MemoryEntry.COLUMN_IMAGE, memory.getImageAsString());
+        values.put(LocalDatabaseContract.MemoryEntry._ID, memory.getID());
+        values.put(LocalDatabaseContract.MemoryEntry.COLUMN_TITLE, memory.getTitle());
+        values.put(LocalDatabaseContract.MemoryEntry.COLUMN_IMAGE, memory.getImageAsString());
 
         return db.insert(TABLE_NAME, null, values) != -1;
     }

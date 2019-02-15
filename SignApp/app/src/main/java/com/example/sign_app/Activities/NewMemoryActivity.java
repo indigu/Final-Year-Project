@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sign_app.R;
-import com.example.sign_app.Database.MemoryDbHelper;
+import com.example.sign_app.Database.LocalDatabaseHelper;
 import com.example.sign_app.Models.Memory;
 
 import java.io.IOException;
@@ -63,7 +63,7 @@ public class NewMemoryActivity extends FragmentActivity {
 
     public void save(View view) {
         Bitmap image = ((BitmapDrawable) selectedImageView.getDrawable()).getBitmap();
-        new MemoryDbHelper(this).addMemory(new Memory(titleEditText.getText().toString(), image));
+        new LocalDatabaseHelper(this).addMemory(new Memory(titleEditText.getText().toString(), image));
         Intent homeActivity = new Intent(this, HomeActivity.class);
         startActivity(homeActivity);
         finish();

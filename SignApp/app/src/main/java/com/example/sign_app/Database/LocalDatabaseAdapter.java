@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.example.sign_app.R;
 import com.example.sign_app.Models.Memory;
 
-public class MemoriesAdapter extends CursorAdapter {
+public class LocalDatabaseAdapter extends CursorAdapter {
 
-    public MemoriesAdapter(Context context, Cursor cursor, boolean autoRequery) {
+    public LocalDatabaseAdapter(Context context, Cursor cursor, boolean autoRequery) {
         super(context, cursor, autoRequery);
     }
 

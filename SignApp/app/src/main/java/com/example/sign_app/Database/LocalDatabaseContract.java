@@ -2,9 +2,9 @@ package com.example.sign_app.Database;
 
 import android.provider.BaseColumns;
 
-public class MemoryContract {
+public class LocalDatabaseContract {
 
-    private MemoryContract() {
+    private LocalDatabaseContract() {
     }
 
     public static final class MemoryEntry implements BaseColumns {

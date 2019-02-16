@@ -3,7 +3,10 @@ package com.example.sign_app.Database;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private Context mContext;
     private List<OnlineUpload> mUploads;
+    private OnItemClickListener mListener;
 
     // To get values from the outside, to our adapter we need this constructor
     public ImageAdapter(Context context, List<OnlineUpload> uploads){
@@ -39,7 +43,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
                 .load(uploadCurrent.getImageUrl())
                 .placeholder(R.drawable.ic_placeholder)
                 .fit()
-                .centerCrop()
+                .centerInside()
                 .into(holder.imageView);
     }
 
@@ -48,7 +52,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return mUploads.size();
     }
 
-    public class ImageViewHolder extends RecyclerView.ViewHolder{
+    public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
+            View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
 
         public TextView textViewName;
         public ImageView imageView;
@@ -58,6 +63,57 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
             textViewName = itemView.findViewById(R.id.text_view_name);
             imageView = itemView.findViewById(R.id.image_view_upload);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mListener != null){
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION){
+                    mListener.onItemClick(position);
+                }
+            }
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            MenuItem delete = menu.add(Menu.NONE, 1, 1, "Delete");
+
+            delete.setOnMenuItemClickListener(this);
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            if (mListener != null){
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION){
+
+                    // possibility to add more
+                    if (item.getItemId() == 1){
+                        mListener.onDeleteClick(position);
+                        return true;
+                    }
+
+                }
+            }
+            return false;
         }
     }
+
+    public interface OnItemClickListener{
+
+        void onItemClick(int position);
+
+        void onDeleteClick(int position);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
+
 }

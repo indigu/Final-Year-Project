@@ -1,6 +1,7 @@
 package com.example.sign_app.Fragments;
 
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,21 +16,27 @@ import android.widget.Toast;
 import com.example.sign_app.Database.ImageAdapter;
 import com.example.sign_app.Database.OnlineUpload;
 import com.example.sign_app.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagesFragment extends Fragment {
+public class ImagesFragment extends Fragment implements ImageAdapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private ImageAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private ProgressBar mProgressCircle;
+    private ValueEventListener mVELListener;
 
+    private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     private List<OnlineUpload> mUploads;
 
@@ -56,22 +63,33 @@ public class ImagesFragment extends Fragment {
 
         mUploads = new ArrayList<>();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
-
         mAdapter = new ImageAdapter(getActivity(),mUploads);
         mRecyclerView.setAdapter(mAdapter);
 
-        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+        mAdapter.setOnItemClickListener(ImagesFragment.this);
+
+        mStorage = FirebaseStorage.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+
+        mVELListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                mUploads.clear();
+
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     OnlineUpload upload = postSnapshot.getValue(OnlineUpload.class);
+                    upload.setKey(postSnapshot.getKey());
                     mUploads.add(upload);
                 }
 
-                mAdapter = new ImageAdapter(getActivity(), mUploads);
-
+                mAdapter = new ImageAdapter(getActivity(),mUploads);
                 mRecyclerView.setAdapter(mAdapter);
+
+                mAdapter.setOnItemClickListener(ImagesFragment.this);
+
+                mAdapter.notifyDataSetChanged();
+
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
 
@@ -81,11 +99,37 @@ public class ImagesFragment extends Fragment {
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
-
         return view;
     }
 
     private void showMessage(String s) {
         Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        showMessage("Item: " + position);
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        OnlineUpload selectedItem = mUploads.get(position);
+        final String selectedKey = selectedItem.getKey();
+
+        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
+        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                mDatabaseRef.child(selectedKey).removeValue();
+                showMessage("Deleted Item");
+
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mDatabaseRef.removeEventListener(mVELListener);
     }
 }

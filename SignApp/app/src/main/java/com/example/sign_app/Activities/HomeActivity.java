@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.sign_app.Fragments.LocalDatabaseFragment;
 import com.example.sign_app.Fragments.ImagesFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
-import com.example.sign_app.Fragments.QuizzesFragment;
+import com.example.sign_app.MachineLearning.CameraActivity;
 import com.example.sign_app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -102,13 +102,17 @@ public class HomeActivity extends AppCompatActivity
                 fragment = new OnlineDatabasesFragment();
                 break;
             case R.id.nav_quizzes:
-                fragment = new QuizzesFragment();
+//                fragment = new QuizzesFragment();
+                Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
+                startActivity(cameraActivity);
+                finish();
                 break;
             case R.id.nav_signOut:
                 FirebaseAuth.getInstance().signOut();
                 Intent loginActivity = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(loginActivity);
                 finish();
+                break;
         }
 
         if (fragment != null) {
@@ -145,6 +149,5 @@ public class HomeActivity extends AppCompatActivity
 
         // Glide for image loading
         Glide.with(this).load(currentUser.getPhotoUrl()).into(navAvatar);
-
     }
 }

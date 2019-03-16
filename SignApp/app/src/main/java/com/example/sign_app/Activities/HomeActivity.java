@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.sign_app.Fragments.LocalDatabaseFragment;
 import com.example.sign_app.Fragments.ImagesFragment;
 import com.example.sign_app.Fragments.OnlineDatabasesFragment;
+import com.example.sign_app.Fragments.PictionaryFragment;
 import com.example.sign_app.MachineLearning.CameraActivity;
 import com.example.sign_app.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,11 +102,13 @@ public class HomeActivity extends AppCompatActivity
             case R.id.nav_onlineDatabase:
                 fragment = new OnlineDatabasesFragment();
                 break;
-            case R.id.nav_quizzes:
-//                fragment = new QuizzesFragment();
+            case R.id.nav_machineLearning:
                 Intent cameraActivity = new Intent(getApplicationContext(), CameraActivity.class);
                 startActivity(cameraActivity);
                 finish();
+                break;
+            case R.id.nav_pictionary:
+                fragment = new PictionaryFragment();
                 break;
             case R.id.nav_signOut:
                 FirebaseAuth.getInstance().signOut();

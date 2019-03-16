@@ -17,9 +17,13 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Upload Online" />
         <item
-            android:id="@+id/nav_quizzes"
+            android:id="@+id/nav_machineLearning"
             android:icon="@drawable/ic_quizzes"
-            android:title="Quizzes" />
+            android:title="Machine Learning" />
+        <item
+            android:id="@+id/nav_pictionary"
+            android:icon="@drawable/ic_quizzes"
+            android:title="Online Pictionary" />
         <item
             android:id="@+id/nav_signOut"
             android:icon="@drawable/ic_exit"

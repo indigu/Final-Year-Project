@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/regAvatar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
@@ -134,21 +134,5 @@
         app:layout_constraintStart_toStartOf="@+id/regButton"
         app:layout_constraintTop_toTopOf="@+id/regButton" />
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="1dp"
-        android:background="@null"
-        android:ems="10"
-        android:hint="Click on the hand to add your own avatar!"
-        android:importantForAutofill="no"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/regAvatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

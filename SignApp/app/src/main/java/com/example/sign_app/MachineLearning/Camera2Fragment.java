@@ -658,7 +658,6 @@ public class Camera2Fragment extends Fragment {
      */
     private void classifyFrame() {
         if (classifier == null || getActivity() == null || cameraDevice == null) {
-            showToast("Uninitialized Classifier or invalid context.");
             return;
         }
         Bitmap bitmap =
